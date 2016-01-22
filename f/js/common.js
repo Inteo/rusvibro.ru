@@ -453,4 +453,10 @@ $(function() {
   $('#all-goods').on('click', function(){
     return false;
   });
+  if (is_touch_device()) {
+    $('body').addClass('touch');
+  }
+  else {
+    $('body').addClass('no-touch');
+  }
 });
