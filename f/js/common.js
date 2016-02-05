@@ -1029,24 +1029,26 @@ function isChecked(id) {
 })(jQuery);
 
 $(document).ready(function() {
-  var heightHeader = $('#header').height(),
-    heightHeaderBottom = $('.catalog-menu').height(),
-    top = heightHeader - heightHeaderBottom;
+  if (!$('.catalog-menu').hasClass('not-fixed')) {
+    var heightHeader = $('#header').height(),
+      heightHeaderBottom = $('.catalog-menu').height(),
+      top = heightHeader - heightHeaderBottom;
 
-  if ($(document).scrollTop() > top) {
-    $('#header-bottom').addClass('sticky');
-    $('#header').css('height', heightHeader);
-  }
-        
-  $(document).scroll(function() {
-    if ($(this).scrollTop() > top) {
+    if ($(document).scrollTop() > top) {
       $('.catalog-menu').addClass('sticky');
       $('#header').css('height', heightHeader);
-    } 
-    else {
-      $('.catalog-menu').removeClass('sticky');
     }
-  });
+        
+    $(document).scroll(function() {
+      if ($(this).scrollTop() > top) {
+        $('.catalog-menu').addClass('sticky');
+        $('#header').css('height', heightHeader);
+      } 
+      else {
+        $('.catalog-menu').removeClass('sticky');
+      }
+    });
+  }
 
   $("a[rel*='external']").click(function() {
     this.target = "_blank";
